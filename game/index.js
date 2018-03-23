@@ -1,6 +1,6 @@
 
 
-var game = new Phaser.Game('100%',500);
+var game = new Phaser.Game(500,500);
 
 
 
@@ -78,12 +78,12 @@ var mainState = {
             color: '#374A59'
         }));
         left.body.immovable = true;
-        var right = this.walls.create(game.world.width-16,0,box({
+        /*var right = this.walls.create(game.world.width-16,0,box({
             length: 16,
             width: game.world.height,
             color: '#374A59'
-        }));
-        right.body.immovable = true;
+        }));*/
+        //right.body.immovable = true;
 
         var line1 = this.walls.create(game.world.width/3,128,box({
             length: 16,
@@ -217,6 +217,37 @@ gameOverState = {
 
     }
 };
+MenuStartState = {
+    create: function(){
+        var isp2 = true;
+        label = game.add.text(game.world.width/2,game.world.height/2, 'Test Game',{
+            font:'40px Arial',
+            fill: '#fff',
+            align: 'center'
+        });
+        label2 = game.add.text(game.world.width/2,game.world.height -game.world.height/3, 'players??',{
+            font:'30px Arial',
+            fill: '#fff',
+            align: 'center'
+        });
+        label.anchor.setTo(0.5,0.5);
+        label2.anchor.setTo(0.5,0.75);
+
+   /* this.addMenuOption('singlePlayer', function () {
+        isp2 = false;
+      game.state.start("main");
+
+    });
+    this.addMenuOption('twoPlayers', function () {
+
+      game.state.start("main");
+    });*/
+    },
+    update: function(){
+
+    }
+}
+game.state.add('start',MenuStartState);
 game.state.add('gameOver',gameOverState);
 game.state.add('main', mainState);
-game.state.start('main');
+game.state.start('start');
